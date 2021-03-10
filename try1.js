@@ -83,7 +83,9 @@ return iatExtension({
 			stimulusCss : {color:'#31940F','font-size':'2.3em'}
 		},
 		
-		//The default feedback messages for each cutoff -
+		
+	
+	//The default feedback messages for each cutoff -
 			//attribute1, and attribute2 will be replaced with the name of attribute1 and attribute2.
 			//categoryA is the name of the category that is found to be associated with attribute1,
 			//and categoryB is the name of the category that is found to be associated with attribute2.
