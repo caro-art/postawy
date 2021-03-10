@@ -3,19 +3,19 @@ define(['pipAPI','https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/IAT/qualtr
 
 return iatExtension({
       attribute1 : {
-			name : 'Male', //Will appear in the data.
+			name : 'Prawicowość', //Will appear in the data.
 			title : {
-				media : {word : 'Male'}, //Name of the category presented in the task.
+				media : {word : 'Prawicowość'}, //Name of the category presented in the task.
 				css : {color:'#0000FF','font-size':'1.8em'}, //Style of the category title.
 				height : 4 //Used to position the "Or" in the combined block.
 			}, 
 			stimulusMedia : [ //Stimuli content as PIP's media objects
-				{word: 'Man'},
-				{word: 'Son'},
-				{word: 'Father'},
-				{word: 'Boy'},
-				{word: 'Uncle'},
-				{word: 'Grandpa'},
+				{word: 'konserwatyzm'},
+				{word: 'ideologia'},
+				{word: 'Prawo i Sprawiedliwość'},
+				{word: 'tradycja'},
+				{word: 'Mateusz Morawiecki'},
+				{word: 'patriarchat'},
 				{word: 'Husband'},
 				{word: 'Male'}	
 			], 
