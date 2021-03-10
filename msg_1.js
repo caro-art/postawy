@@ -142,12 +142,12 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			remindError : true,
 
 			remindErrorText : '<p align="center" style="font-size:"0.6em"; font-family:arial">' +
-			'If you make a mistake, a red <font color="#ff0000"><b>X</b></font> will appear. ' +
-			'Press the other key to continue.<p/>',
+			'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. ' +
+			'Naciśnij dowolny klawisz, aby kontynuować.<p/>',
 
 			remindErrorTextTouch : '<p align="center" style="font-size:"1.4em"; font-family:arial">' +
-			'If you make a mistake, a red <font color="#ff0000"><b>X</b></font> will appear. ' +
-			'Touch the other side to continue.<p/>',
+			'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. ' +
+			'Dotknij ekranu, aby kontynuować.<p/>',
 
 			errorCorrection : true, //Should participants correct error responses?
 			errorFBDuration : 500, //Duration of error feedback display (relevant only when errorCorrection is false)
@@ -156,8 +156,8 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			fontColor : '#000000', //The default color used for printed messages.
 			
 			//Text and style for key instructions displayed about the category labels.
-			leftKeyText : 'Press "E" for', 
-			rightKeyText : 'Press "I" for', 
+			leftKeyText : 'Naciśnij "E" dla', 
+			rightKeyText : 'Naciśnij "I" dla', 
 			keysCss : {'font-size':'0.8em', 'font-family':'courier', color:'#000000'},
 			//Text and style for the separator between the top and bottom category labels.
 			orText : 'or', 
@@ -165,8 +165,8 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			
 			instWidth : 99, //The width of the instructions stimulus
             
-			finalText : 'Press space to continue to the next task', 
-			finalTouchText : 'Touch the bottom green area to continue to the next task',
+			finalText : 'Naciśnij spację, aby kontynuować do następnej części.', 
+			finalTouchText : 'Dotknij dolnego zielonego obszaru, aby przejść do następnego zadania',
 
 			touchMaxStimulusWidth : '50%', 
 			touchMaxStimulusHeight : '50%', 
@@ -180,12 +180,12 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			instAttributePractice: '<div><p align="center" style="font-size:20px; font-family:arial">' +
 				'<font color="#000000"><u>Part blockNum of nBlocks </u><br/><br/></p>' +
 				'<p style="font-size:20px; text-align:left; vertical-align:bottom; margin-left:10px; font-family:arial">' +
-				'Put a left finger on the <b>E</b> key for items that belong to the category <font color="#0000ff">leftAttribute.</font>' +
-				'<br/>Put a right finger on the <b>I</b> key for items that belong to the category <font color="#0000ff">rightAttribute</font>.<br/><br/>' +
-				'If you make a mistake, a red <font color="#ff0000"><b>X</b></font> will appear. ' +
-				'Press the other key to continue.<br/>' +
-				'<u>Go as fast as you can</u> while being accurate.<br/><br/></p>'+
-				'<p align="center">Press the <b>space bar</b> when you are ready to start.</font></p></div>',
+				'Naciśnij palcem lewej ręki na klawisz <b>E</b> dla haseł z kategorii <font color="#0000ff">leftAttribute.</font>' +
+				'<br/>Naciśnij palcem prawej ręki na klawisz <b>I</b> dla haseł z kategorii <font color="#0000ff">rightAttribute</font>.<br/><br/>' +
+				'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. ' +
+				'Naciśnij dowolny klawisz, aby kontynuować. <br/>' +
+				'<u>Wykonuj zadanie jak najszybciej </u> i jak najdokładniej.<br/><br/></p>'+
+				'<p align="center">Naciśnij <b>spację</b> jak będziesz gotowy, aby zacząć.</font></p></div>',
 			instAttributePracticeTouch: [
 				'<div>',
 					'<p align="center">',
@@ -193,26 +193,26 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 					'</p>',
 					'<p align="left" style="margin-left:5px">',
 						'<br/>',
-						'Put a left finger over the the <b>left</b> green area for items that belong to the category <font color="#0000ff">leftAttribute</font>.<br/>',
-						'Put a right finger over the <b>right</b> green area for items that belong to the category <font color="#0000ff">rightAttribute</font>.<br/>',
-						'Items will appear one at a time.<br/>',
+						'Naciśnij palcem lewej ręki na <b>left</b> zielony obszar dla haseł należących do kategorii <font color="#0000ff">leftAttribute</font>.<br/>',
+						'Naciśnij palcem prawej ręki na <b>right</b> zielony obszar dla haseł należących do kategorii <font color="#0000ff">rightAttribute</font>.<br/>',
+						'Hasła będą pojawiały się pojedynczo.<br/>',
 						'<br/>',
-						'If you make a mistake, a red <font color="#ff0000"><b>X</b></font> will appear. Touch the other side. <u>Go as fast as you can</u> while being accurate.',
+						'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. Dotknij ekranu, aby kontynuować. <u>Wykonuj zadanie jak najszybciej</u> i jak najdokładniej.',
 					'</p>',
-					'<p align="center">Touch the <b>lower </b> green area to start.</p>',
+					'<p align="center">Dotknij <b>lower </b> zielonego obszaru, aby zacząć.</p>',
 				'</div>'
 			].join('\n'),
 
 			instCategoriesPractice: '<div><p align="center" style="font-size:20px; font-family:arial">' +
 				'<font color="#000000"><u>Part blockNum of nBlocks </u><br/><br/></p>' +
 				'<p style="font-size:20px; text-align:left; vertical-align:bottom; margin-left:10px; font-family:arial">' +
-				'Put a left finger on the <b>E</b> key for items that belong to the category <font color="#336600">leftCategory</font>. ' +
-				'<br/>Put a right finger on the <b>I</b> key for items that belong to the category <font color="#336600">rightCategory</font>.<br/>' +
-				'Items will appear one at a time.<br/><br/>' +
-				'If you make a mistake, a red <font color="#ff0000"><b>X</b></font> will appear. ' +
-				'Press the other key to continue.<br/>' +
-				'<u>Go as fast as you can</u> while being accurate.<br/><br/></p>'+
-				'<p align="center">Press the <b>space bar</b> when you are ready to start.</font></p></div>',
+				'Naciśnij palcem lewej ręki na klawisz <b>E</b> dla haseł z kategorii <font color="#336600">leftCategory</font>. ' +
+				'<br/>Naciśnij palcem prawej ręki na klawisz <b>I</b> dla haseł z kategorii <font color="#336600">rightCategory</font>.<br/>' +
+				'Hasła będą pojawiały się pojedynczo.<br/><br/>' +
+				'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. ' +
+				'Naciśnij dowolny klawisz, aby kontynuować.<br/>' +
+				'<u>Wykonuj zadanie jak najszybciej</u> i jak najdokładniej.<br/><br/></p>'+
+				'<p align="center">Naciśnij <b>spację</b> jak będziesz gotowy, aby zacząć.</font></p></div>',
 			instCategoriesPracticeTouch: [
 				'<div>',
 					'<p align="center">',
@@ -220,26 +220,26 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 					'</p>',
 					'<p align="left" style="margin-left:5px">',
 						'<br/>',
-						'Put a left finger over the <b>left</b> green area for items that belong to the category <font color="#336600">leftCategory</font>.<br/>',
-						'Put a right finger over the <b>right</b> green area for items that belong to the category <font color="#336600">rightCategory</font>.<br/>',
-						'Items will appear one at a time.<br/>',
+						'Naciśnij palcem lewej ręki na <b>left</b> zielony obszar dla haseł należących do kategorii <font color="#336600">leftCategory</font>.<br/>',
+						'Naciśnij palcem prawej ręki na <b>right</b> zielony obszar dla haseł należących do kategorii <font color="#336600">rightCategory</font>.<br/>',
+						'Hasła będą pojawiały się pojedynczo.<br/>',
 						'<br/>',
-						'If you make a mistake, a red <font color="#ff0000"><b>X</b></font> will appear. Touch the other side. <u>Go as fast as you can</u> while being accurate.',
+						'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. Dotknij ekranu, aby kontynuować. <u>Wykonuj zadanie jak najszybciej</u> i jak najdokładniej.',
 					'</p>',
-					'<p align="center">Touch the <b>lower </b> green area to start.</p>',
+					'<p align="center">Dotknij <b>lower </b> zielonego obszaru, aby zacząć.</p>',
 				'</div>'
 			].join('\n'),
 
 			instFirstCombined : '<div><p align="center" style="font-size:20px; font-family:arial">' +
 				'<font color="#000000"><u>Part blockNum of nBlocks </u><br/><br/></p>' +
 				'<p style="font-size:20px; text-align:left; vertical-align:bottom; margin-left:10px; font-family:arial">' +
-				'Use the <b>E</b> key for <font color="#336600">leftCategory</font> and for <font color="#0000ff">leftAttribute</font>.<br/>' +
-				'Use the <b>I</b> key for <font color="#336600">rightCategory</font> and for  <font color="#0000ff">rightAttribute</font>.<br/>' +
-				'Each item belongs to only one category.<br/><br/>' +
-				'If you make a mistake, a red <font color="#ff0000"><b>X</b></font> will appear. ' +
-				'Press the other key to continue.<br/>' + 
-				'<u>Go as fast as you can</u> while being accurate.<br/><br/></p>' +
-				'<p align="center">Press the <b>space bar</b> when you are ready to start.</font></p></div>',
+				'Naciśnij klawisz <b>E</b> dla <font color="#336600">leftCategory</font> oraz dla <font color="#0000ff">leftAttribute</font>.<br/>' +
+				'Naciśnij klawisz <b>I</b> dla <font color="#336600">rightCategory</font> oraz dla  <font color="#0000ff">rightAttribute</font>.<br/>' +
+				'Każde hasło należy do tylko jednej kategorii.<br/><br/>' +
+				'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. ' +
+				'Naciśnij dowolny klawisz, aby kontynuować.<br/>' + 
+				'<u>Wykonuj zadanie jak najszybciej</u> i jak najdokładniej.<br/><br/></p>' +
+				'<p align="center">Naciśnij <b>spację</b> jak będziesz gotowy, aby zacząć.</font></p></div>',
 			instFirstCombinedTouch:[
 				'<div>',
 					'<p align="center">',
@@ -248,23 +248,23 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 					'<br/>',
 					'<br/>',
 					'<p align="left" style="margin-left:5px">',
-						'Put a left finger over the <b>left</b> green area for <font color="#336600">leftCategory</font> items and for <font color="#0000ff">leftAttribute</font>.</br>',
-						'Put a right finger over the <b>right</b> green area for <font color="#336600">rightCategory</font> items and for <font color="#0000ff">rightAttribute</font>.</br>',
-							'If you make a mistake, a red <font color="#ff0000"><b>X</b></font> will appear. Touch the other side. <u>Go as fast as you can</u> while being accurate.</br>',
+						'Naciśnij palcem lewej ręki na <b>left</b> zielony obszar dla <font color="#336600">leftCategory</font> haseł i dla <font color="#0000ff">leftAttribute</font>.</br>',
+						'Naciśnij palcem prawej ręki na <b>right</b> zielony obszar dla <font color="#336600">rightCategory</font> haseł i dla <font color="#0000ff">rightAttribute</font>.</br>',
+							'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. Touch the other side. <u>Go as fast as you can</u> while being accurate.</br>',
 						'</p>',
-						'<p align="center">Touch the <b>lower </b> green area to start.</p>',
+						'<p align="center">Dotknij <b>lower </b> zielonego obszaru, aby zacząć.</p>',
 				'</div>'
 			].join('\n'),
 
 			instSecondCombined : '<div><p align="center" style="font-size:20px; font-family:arial">' +
 				'<font color="#000000"><u>Part blockNum of nBlocks </u><br/><br/></p>' +
 				'<p style="font-size:20px; text-align:left; vertical-align:bottom; margin-left:10px; font-family:arial">' +
-				'This is the same as the previous part.<br/>' +
-				'Use the <b>E</b> key for <font color="#336600">leftCategory</font> and for <font color="#0000ff">leftAttribute</font>.<br/>' +
-				'Use the <b>I</b> key for <font color="#336600">rightCategory</font> and for  <font color="#0000ff">rightAttribute</font>.<br/>' +
-				'Each item belongs to only one category.<br/><br/>' +
-				'<u>Go as fast as you can</u> while being accurate.<br/><br/></p>' +
-				'<p align="center">Press the <b>space bar</b> when you are ready to start.</font></p></div>',
+				'Ta część polega na tym samym co poprzednia.<br/>' +
+				'Naciśnij klawisz <b>E</b> dla <font color="#336600">leftCategory</font> oraz dla <font color="#0000ff">leftAttribute</font>.<br/>' +
+				'Naciśnij klawisz <b>I</b> dla <font color="#336600">rightCategory</font> oraz dla  <font color="#0000ff">rightAttribute</font>.<br/>' +
+				'Każde hasło należy do tylko jednej kategorii.<br/><br/>' +
+				'<u>Wykonuj zadanie jak najszybciej</u> i jak najdokładniej.<br/><br/></p>' +
+				'<p align="center">Naciśnij <b>spację</b> jak będziesz gotowy, aby zacząć.</font></p></div>',
 			instSecondCombinedTouch:[
 				'<div>',
 					'<p align="center"><u>Part blockNum of nBlocks</u></p>',
@@ -272,23 +272,23 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 					'<br/>',
 
 					'<p align="left" style="margin-left:5px">',
-						'Put a left finger over the <b>left</b> green area for <font color="#336600">leftCategory</font> items and for <font color="#0000ff">leftAttribute</font>.<br/>',
-						'Put a right finger over the <b>right</b> green area for <font color="#336600">rightCategory</font> items and for <font color="#0000ff">rightAttribute</font>.<br/>',
+						'Naciśnij palcem lewej ręki na <b>left</b> zielony obszar dla <font color="#336600">leftCategory</font>haseł i dla <font color="#0000ff">leftAttribute</font>.<br/>',
+						'Naciśnij palcem prawej ręki na <b>right</b> zielony obszar dla <font color="#336600">rightCategory</font> haseł i dla <font color="#0000ff">rightAttribute</font>.<br/>',
 						'<br/>',
-						'<u>Go as fast as you can</u> while being accurate.<br/>',
+						'<u>Wykonuj zadanie jak najszybciej</u> i jak najdokładniej.<br/>',
 					'</p>',
-					'<p align="center">Touch the <b>lower </b> green area to start.</p>',
+					'<p align="center">Dotknij <b>lower </b> zielonego obszaru, aby zacząć.</p>',
 				'</div>'
 			].join('\n'),
 
 			instSwitchCategories : '<div><p align="center" style="font-size:20px; font-family:arial">' +
 				'<font color="#000000"><u>Part blockNum of nBlocks </u><br/><br/></p>' +
 				'<p style="font-size:20px; text-align:left; vertical-align:bottom; margin-left:10px; font-family:arial">' +
-				'<b>Watch out, the labels have changed position!</b><br/>' +
-				'Put the left finger on the <b>E</b> key for <font color="#336600">leftCategory</font>.<br/>' +
-				'Put the right finger on the <b>I</b> key for <font color="#336600">rightCategory</font>.<br/><br/>' +
-				'<u>Go as fast as you can</u> while being accurate.<br/><br/></p>' +
-				'<p align="center">Press the <b>space bar</b> when you are ready to start.</font></p></div>',
+				'<b>Uważaj, kategorie zmieniły swoje pozycje!</b><br/>' +
+				'Naciśnij palcem lewej ręki na klawisz <b>E</b> dla <font color="#336600">leftCategory</font>.<br/>' +
+				'Naciśnij palcem prawej ręki na klawisz <b>I</b> dla <font color="#336600">rightCategory</font>.<br/><br/>' +
+				'<u>Wykonuj zadanie jak najszybciej</u> i jak najdokładniej.<br/><br/></p>' +
+				'<p align="center">Naciśnij <b>spację</b> jak będziesz gotowy, aby zacząć.</font></p></div>',
 			instSwitchCategoriesTouch: [
 				'<div>',
 					'<p align="center">',
@@ -297,13 +297,13 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 					'<p align="left" style="margin-left:5px">',
 						'<br/>',
 						'Watch out, the labels have changed position!<br/>',
-							'Put a left finger over the <b>left</b> green area for <font color="#336600">leftCategory</font> items.<br/>',
-							'Put a right finger over the <b>right</b> green area for <font color="#336600">rightCategory</font> items.<br/>',
-							'Items will appear one at a time.',
+							'Naciśnij palcem lewej ręki na <b>left</b> zielony obszar dla <font color="#336600">leftCategory</font> items.<br/>',
+							'Naciśnij palcem prawej ręki na <b>right</b> zielony obszar dla <font color="#336600">rightCategory</font> items.<br/>',
+							'Hasła będą pojawiały się pojedynczo.',
 							'<br/>',
-							'If you make a mistake, a red <font color="#ff0000"><b>X</b></font> will appear. Touch the other side. <u>Go as fast as you can</u> while being accurate.<br/>',
+							'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. Dotknij ekranu, aby kontynuować. <u>Wykonuj zadanie jak najszybciej</u> i jak najdokładniej.<br/>',
 						'</p>',
-						'<p align="center">Touch the <b>lower </b> green area to start.</p>',
+						'<p align="center">Dotknij <b>lower </b> zielonego obszaru, aby zacząć.</p>',
 				'</div>'
 			].join('\n'),
 
