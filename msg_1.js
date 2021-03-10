@@ -143,7 +143,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 
 			remindErrorText : '<p align="center" style="font-size:"0.6em"; font-family:arial">' +
 			'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. ' +
-			'Naciśnij dowolny klawisz, aby kontynuować.<p/>',
+			'Naciśnij klawisz E lub I, aby kontynuować.<p/>',
 
 			remindErrorTextTouch : '<p align="center" style="font-size:"1.4em"; font-family:arial">' +
 			'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. ' +
