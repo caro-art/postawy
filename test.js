@@ -1,23 +1,27 @@
+//YBYB:Created from iat8.js, for Qualtrics
 define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) {
 
 	/**
-	Created by: Yoav Bar-Anan (baranan@gmail.com). Modified by Elad
+	Created by: Yoav Bar-Anan (baranan@gmail.com). Modified by Gal
 	 * @param  {Object} options Options that replace the defaults...
 	 * @return {Object}         PIP script
 	**/
 
 	function iatExtension(options)
 	{
-		var API = new APIConstructor();
+		var API = new APIConstructor();		
 		var scorer = new Scorer();
-		var piCurrent = API.getCurrent();
+        var piCurrent = API.getCurrent();
+		
 
 		//Here we set the settings of our task. 
 		//Read the comments to learn what each parameters means.
 		//You can also do that from the outside, with a dedicated jsp file.
 		var iatObj =
 		{
-			istouch:false, //Set whether the task is on a touch device.
+			fullscreen:false, //Should we show the task in full screen? A Qualtrics-only feature because in the usual Minno, we can go full-screen right at the beginning of the study.
+        
+			isTouch:false, //Set whether the task is on a touch device.
 			//Set the canvas of the task
 			canvas : {
 				maxWidth: 725,
@@ -27,8 +31,9 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				canvasBackground: '#ffffff',
 				borderColor: 'lightblue'
 			},
+			//When scoring, we will consider the compatible condition the pairing condition that requires response with one key to [category1,attribute1] and the other key to [category2,attribute2]
 			category1 : {
-				name : 'Black people', //Will appear in the data.
+				name : 'Black people', //Will appear in the data and in the default feedback message.
 				title : {
 					media : {word : 'Black people'}, //Name of the category presented in the task.
 					css : {color:'#336600','font-size':'1.8em'}, //Style of the category title.
@@ -46,7 +51,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				stimulusCss : {color:'#336600','font-size':'2.3em'}
 			},
 			category2 :	{
-				name : 'White people', //Will appear in the data.
+				name : 'White people', //Will appear in the data and in the default feedback message.
 				title : {
 					media : {word : 'White people'}, //Name of the category presented in the task.
 					css : {color:'#336600','font-size':'1.8em'}, //Style of the category title.
@@ -62,27 +67,6 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				],
 				//Stimulus css
 				stimulusCss : {color:'#336600','font-size':'2.3em'}
-			},
-			attribute2 :
-			{
-				name : 'Good words',
-				title : {
-					media : {word : 'Good words'},
-					css : {color:'#0000FF','font-size':'1.8em'},
-					height : 4 //Used to position the "Or" in the combined block.
-				},
-				stimulusMedia : [ //Stimuli content as PIP's media objects
-					{word: 'laughter'},
-					{word: 'happy'},
-					{word: 'glorious'},
-					{word: 'joy'},
-					{word: 'wonderful'},
-					{word: 'peace'},
-					{word: 'pleasure'},
-					{word: 'love'}
-				],
-				//Stimulus css
-				stimulusCss : {color:'#0000FF','font-size':'2.3em'}
 			},
 			attribute1 :
 			{
@@ -105,21 +89,44 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				//Stimulus css
 				stimulusCss : {color:'#0000FF','font-size':'2.3em'}
 			},
+			attribute2 :
+			{
+				name : 'Good words',
+				title : {
+					media : {word : 'Good words'},
+					css : {color:'#0000FF','font-size':'1.8em'},
+					height : 4 //Used to position the "Or" in the combined block.
+				},
+				stimulusMedia : [ //Stimuli content as PIP's media objects
+					{word: 'laughter'},
+					{word: 'happy'},
+					{word: 'glorious'},
+					{word: 'joy'},
+					{word: 'wonderful'},
+					{word: 'peace'},
+					{word: 'pleasure'},
+					{word: 'love'}
+				],
+				//Stimulus css
+				stimulusCss : {color:'#0000FF','font-size':'2.3em'}
+			},
 
 			base_url : {//Where are your images at?
 				image : '/implicit/user/yba/pipexample/biat/images/'
 			},
 
-			nBlocks : 7, //Can be 5 or 7.
+			//nBlocks : 7, This is not-supported anymore. If you want a 5-block IAT, change blockSecondCombined_nTrials to 0.
+			
 			////In each block, we can include a number of mini-blocks, to reduce repetition of same group/response.
+			////If you set the number of trials in any block to 0, that block will be skipped.
 			blockAttributes_nTrials : 20,
 			blockAttributes_nMiniBlocks : 5,
 			blockCategories_nTrials : 20,
 			blockCategories_nMiniBlocks : 5,
 			blockFirstCombined_nTrials : 20,
 			blockFirstCombined_nMiniBlocks : 5,
-			blockSecondCombined_nTrials : 40, //Not used if nBlocks=5.
-			blockSecondCombined_nMiniBlocks : 10, //Not used if nBlocks=5.
+			blockSecondCombined_nTrials : 40, //Change to 0 if you want 5 blocks (you would probably want to increase blockFirstCombined_nTrials).
+			blockSecondCombined_nMiniBlocks : 10, 
 			blockSwitch_nTrials : 28,
 			blockSwitch_nMiniBlocks : 7,
 
@@ -157,7 +164,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			orCss : {'font-size':'1.8em', color:'#000000'},
 			
 			instWidth : 99, //The width of the instructions stimulus
-			
+            
 			finalText : 'Press space to continue to the next task', 
 			finalTouchText : 'Touch the bottom green area to continue to the next task',
 
@@ -278,8 +285,8 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				'<font color="#000000"><u>Part blockNum of nBlocks </u><br/><br/></p>' +
 				'<p style="font-size:20px; text-align:left; vertical-align:bottom; margin-left:10px; font-family:arial">' +
 				'<b>Watch out, the labels have changed position!</b><br/>' +
-				'Use the left finger on the <b>E</b> key for <font color="#336600">leftCategory</font>.<br/>' +
-				'Use the right finger on the <b>I</b> key for <font color="#336600">rightCategory</font>.<br/><br/>' +
+				'Put the left finger on the <b>E</b> key for <font color="#336600">leftCategory</font>.<br/>' +
+				'Put the right finger on the <b>I</b> key for <font color="#336600">rightCategory</font>.<br/><br/>' +
 				'<u>Go as fast as you can</u> while being accurate.<br/><br/></p>' +
 				'<p align="center">Press the <b>space bar</b> when you are ready to start.</font></p></div>',
 			instSwitchCategoriesTouch: [
@@ -305,14 +312,24 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			instThirdCombinedTouch : 'instFirstCombined', //this means that we're going to use the instFirstCombined property for the third combined block as well. You can change that.
 			instFourthCombinedTouch : 'instSecondCombined', //this means that we're going to use the instSecondCombined property for the fourth combined block as well. You can change that.
 
+			showDebriefing:false, //Show feedback in the last trial? Relevant only in a Qualtrics IAT because in Qualtrics we cannot access the saved feedback and IAT score later in the survey.
+			//Texts for the trials that show the debriefing.
+			preDebriefingText : 'Press space to see your result', //Text in the trial that comes before showing the debriefing.
+			preDebriefingTouchText : 'Touch the bottom green area to see your result', //Touch version for the text in the trial that comes before showing the debriefing.
+			debriefingTextTop : 'Your result:', //Will be shown above the feedback text.
+			//ATTENTION: We do not recommend showing participants their results. The IAT is a typical psychological measure so it is not very accurate. 
+			//In Project Implicit's website, you can see that we added much text to explain that there is still much unknown about the meaning of these results.
+			//We strongly recommend that you provide all these details in the debriefing of the experiment.
+			debriefingTextBottom : 'This result is not a definitive assessment of your attitudes. It is provided for educational purposes only.', //Will be shown below the feedback text. 
+
 			//The default feedback messages for each cutoff -
 			//attribute1, and attribute2 will be replaced with the name of attribute1 and attribute2.
 			//categoryA is the name of the category that is found to be associated with attribute1,
 			//and categoryB is the name of the category that is found to be associated with attribute2.
-			fb_strong_Att1WithCatA_Att2WithCatB : 'Your data suggest a strong automatic preference for categoryB over categoryA.',
-			fb_moderate_Att1WithCatA_Att2WithCatB : 'Your data suggest a moderate automatic preference for categoryB over categoryA.',
-			fb_slight_Att1WithCatA_Att2WithCatB : 'Your data suggest a slight automatic preference for categoryB over categoryA.',
-			fb_equal_CatAvsCatB : 'Your data suggest no automatic preference between categoryA and categoryB.',
+			fb_strong_Att1WithCatA_Att2WithCatB : 'Your responses suggested a strong automatic preference for categoryB over categoryA.',
+			fb_moderate_Att1WithCatA_Att2WithCatB : 'Your responses suggested a moderate automatic preference for categoryB over categoryA.',
+			fb_slight_Att1WithCatA_Att2WithCatB : 'Your responses suggested a slight automatic preference for categoryB over categoryA.',
+			fb_equal_CatAvsCatB : 'Your responses suggested no automatic preference between categoryA and categoryB.',
 
 			//Error messages in the feedback
 			manyErrors: 'There were too many errors made to determine a result.',
@@ -321,11 +338,122 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		};
 
 		// extend the "current" object with the default
-		_.defaults(piCurrent, options, iatObj);
+    _.extend(piCurrent, _.defaults(options, iatObj));
+		_.extend(API.script.settings, options.settings);
+
+        /**
+        **** For Qualtrics
+        */
+        API.addSettings('onEnd', window.minnoJS.onEnd);
+
+		//For debugging the logger
+		//window.minnoJS.logger = console.log;
+		//window.minnoJS.onEnd = console.log;
+		
+        API.addSettings('logger', {
+            // gather logs in array
+            onRow: function(logName, log, settings, ctx){
+                if (!ctx.logs) ctx.logs = [];
+                ctx.logs.push(log);
+            },
+            // onEnd trigger save (by returning a value)
+            onEnd: function(name, settings, ctx){
+                return ctx.logs;
+            },
+            // Transform logs into a string
+            // we save as CSV because qualtrics limits to 20K characters and this is more efficient.
+            serialize: function (name, logs) {
+                var headers = ['block', 'trial', 'cond', 'comp', 'type', 'cat',  'stim', 'resp', 'err', 'rt', 'd', 'fb', 'bOrd'];
+                //console.log(logs);
+                var myLogs = [];
+                var iLog;
+                for (iLog = 0; iLog < logs.length; iLog++)
+                {
+                    if(!hasProperties(logs[iLog], ['trial_id', 'name', 'responseHandle', 'stimuli', 'media', 'latency'])){
+                        // console.log('---MISSING PROPERTIY---');
+                        // console.log(logs[iLog]);
+                        // console.log('---MISSING PROPERTIY---');
+                    }
+                    else if(!hasProperties(logs[iLog].data, ['block', 'condition', 'score', 'cong']))
+                    {
+                        // console.log('---MISSING data PROPERTIY---');
+                        // console.log(logs[iLog].data);
+                        // console.log('---MISSING data PROPERTIY---');
+                    }
+                    else
+                    {
+                        // myLogs.push(logs[iLog]);
+                    }
+                }
+                var content = myLogs.map(function (log) { 
+                    return [
+                        log.data.block, //'block'
+                        log.trial_id, //'trial'
+                        log.data.condition, //'cond'
+                        log.data.cong, //'comp'
+                        log.name, //'type'
+                        log.stimuli[0], //'cat'
+                        log.media[0], //'stim'
+                        log.responseHandle, //'resp'
+                        log.data.score, //'err'
+                        log.latency, //'rt'
+                        '', //'d'
+                        '', //'fb'
+                        '' //'bOrd'
+                        ]; });
+                //console.log('mapped');
+                //Add a line with the feedback, score and block-order condition
+                content.push([
+                            9, //'block'
+                            999, //'trial'
+                            'end', //'cond'
+                            '', //'comp'
+                            '', //'type'
+                            '', //'cat'
+                            '', //'stim'
+                            '', //'resp'
+                            '', //'err'
+                            '', //'rt'
+                            piCurrent.d, //'d'
+                            piCurrent.feedback, //'fb'
+                            block3Cond //'bOrd'
+                        ]);
+                //console.log('added');
+                        
+                content.unshift(headers);
+                return toCsv(content);
+
+                function hasProperties(obj, props) {
+                    var iProp;
+                    for (iProp = 0; iProp < props.length; iProp++)
+                    {
+                        if (!obj.hasOwnProperty(props[iProp]))
+                        {
+                           // console.log('missing ' + props[iProp]);
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                function toCsv(matrice) { return matrice.map(buildRow).join('\n'); }
+                function buildRow(arr) { return arr.map(normalize).join(','); }
+                // wrap in double quotes and escape inner double quotes
+                function normalize(val) {
+                    var quotableRgx = /(\n|,|")/;
+                    if (quotableRgx.test(val)) return '"' + val.replace(/"/g, '""') + '"';
+                    return val;
+                }
+            },
+            // Set logs into an input (i.e. put them wherever you want)
+            send: function(name, serialized){
+                window.minnoJS.logger(serialized);
+            }
+        });
 
 		// are we on the touch version
 		var isTouch = piCurrent.isTouch;
-
+		var showDebriefing = piCurrent.showDebriefing;
+		var fullscreen = piCurrent.fullscreen;
 		//We use these objects a lot, so let's read them here
 		var att1 = piCurrent.attribute1;
 		var att2 = piCurrent.attribute2;
@@ -344,6 +472,16 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			cat1.stimulusCss.maxHeight = maxH;
 			cat2.stimulusCss.maxHeight = maxH;
 		}
+		if(fullscreen){
+			var el = document.documentElement;
+			var rfs = el.requestFullscreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+			if (rfs) rfs.call(el);
+			else if(window.ActiveXObject){
+		// for Internet Explorer
+			var wscript = new window.ActiveXObject('WScript.Shell');
+			if (wscript!=null) wscript.SendKeys('{F11}');
+			}
+		}
 
 		//Set the attribute on the left.
 		var rightAttName = (piCurrent.randomAttSide) ? (Math.random() >= 0.5 ? att1.name : att2.name) : att2.name;
@@ -361,15 +499,9 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		*/
 		API.addSettings('canvas',piCurrent.canvas);
 		API.addSettings('base_url',piCurrent.base_url);
-		API.addSettings('logger',{
-			pulse: 20,
-			url : '/implicit/PiPlayerApplet'
-		});
 		API.addSettings('hooks',{
 				endTask: function(){
-					var DScoreObj = scorer.computeD();
-					piCurrent.feedback = DScoreObj.FBMsg;
-					API.save({block3Cond:block3Cond, feedback:DScoreObj.FBMsg, d: DScoreObj.DScore});
+                    window.minnoJS.onEnd();
 				}
 			});
 		/**
@@ -377,7 +509,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		 */
 		API.addTrialSets('sort',{
 			// by default each trial is correct, this is modified in case of an error
-			data: {score:0, parcel:'first'}, //We're using only one parcel for computing the score, so we're always going to call it 'first'.
+			data: {score:0, parcel:'none'}, //We're using only one parcel for computing the score, so we're always going to call it 'first'.
 			// set the interface for trials
 			input: [
 				{handle:'skip1',on:'keypressed', key:27}, //Esc + Enter will skip blocks
@@ -407,7 +539,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				// error when there is no correction
 				{
 					conditions: [
-						{type:'globalEquals', property:'errorCorrection', value:false}, //no error correction.
+						{type:'currentEquals', property:'errorCorrection', value:false}, //no error correction.
 						{type:'inputEquals',value:'onError'} //Was error
 					],
 					actions: [
@@ -635,7 +767,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				var isImage = !!layout.image;
 				var content = layout.word || layout.html || layout.image || layout;
 				if (_.isString(layout) || layout.word) {content = _.escape(content);}
-				return isImage ? '<img src="' + piCurrent.base_url.image + content + '" style="max-width:100%;width:100%" />' : content;
+				return isImage ? '<img src="' + piCurrent.base_url.image + content + '" />' : content;
 			}
 
 			function buildStyle(css){
@@ -646,7 +778,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			}
 
 			var template = '' +
-			'   <div style="margin:0 2%; text-align:center">  '  +
+			'   <div style="margin:0 1em; text-align:center"> '  +
 			'   	<div style="font-size:0.8em; <%= stimulusData.keysCss %>; visibility:<%= stimulusData.isTouch ? \'hidden\' : \'visible\' %>">  '  +
 			'   		<%= stimulusData.isLeft ? stimulusData.leftKeyText : stimulusData.rightKeyText %>  '  +
 			'   	</div>  '  +
@@ -792,7 +924,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 
 		//Get a mixer for a mini-block in a 4-categories block.
 		function getMiniMixer4(params)
-		{//{nTrialsInMini : , currentCond : , rightTrial1 : , leftTrial1 : , rightTrial2 : , leftTrial2 : , blockNum : , blockLayout : )
+		{//{nTrialsInMini : , currentCond : , cong: , rightTrial1 : , leftTrial1 : , rightTrial2 : , leftTrial2 : , blockNum : , blockLayout : , parcel :)
 
 			////Because of the alternation, we randomize the trial order ourselves.
 			var atts = [];
@@ -819,14 +951,14 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				mixerData.push(
 				{
 					inherit : (cats[iCat] == 1) ? params.leftTrial2 : params.rightTrial2,
-					data : {condition : params.currentCond, block : params.blockNum},
+					data : {condition : params.currentCond, block : params.blockNum, parcel:params.parcel, cong:params.cong},
 						layout : params.blockLayout
 				});
 				iCat++;
 				mixerData.push(
 				{
 					inherit : (atts[iAtt] == 1) ? params.leftTrial1 : params.rightTrial1,
-					data : {condition : params.currentCond, block : params.blockNum},
+					data : {condition : params.currentCond, block : params.blockNum, parcel:params.parcel, cong:params.cong},
 						layout : params.blockLayout
 				});
 				iAtt++;
@@ -844,9 +976,16 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 
 		var globalObj = piCurrent;
 
+        //Count the number of blocks in this task
+        var nBlocks = (globalObj.blockAttributes_nTrials<1 ? 0 : 1) + 
+        (globalObj.blockCategories_nTrials<1 ? 0 : 1) + 
+        (globalObj.blockFirstCombined_nTrials<1 ? 0 : 2) + 
+        (globalObj.blockSecondCombined_nTrials<1 ? 0 : 2) + 
+        (globalObj.blockSwitch_nTrials<1 ? 0 : 1);
+
 		//These parameters are used to create trials.
 		var blockParamsAtts = {
-			nBlocks : globalObj.nBlocks,
+			nBlocks : nBlocks,
 			remindError : globalObj.remindError,
 			remindErrorText : globalObj.remindErrorText,
 			remindErrorTextTouch : globalObj.remindErrorTextTouch
@@ -855,7 +994,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		////Block 1: Categories block
 		var iBlock = 1;
 		var blockParamsCats = {
-			nBlocks : globalObj.nBlocks,
+			nBlocks : nBlocks,
 			remindError : globalObj.remindError,
 			remindErrorText : globalObj.remindErrorText,
 			remindErrorTextTouch : globalObj.remindErrorTextTouch
@@ -879,20 +1018,27 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		blockParamsCats.blockNum = iBlock;
 		blockParamsCats.nCats = 2;
 		blockParamsCats.instTemplate = isTouch ? globalObj.instCategoriesPracticeTouch : globalObj.instCategoriesPractice;
-		trialSequence.push(getInstTrial(blockParamsCats));
+
 		var blockLayout = getLayout(blockParamsCats);
 		var nTrialsInMini = blockParamsCats.nTrials/blockParamsCats.nMiniBlocks;
 		var iBlock2Mini;
-		for (iBlock2Mini = 1; iBlock2Mini <= blockParamsCats.nMiniBlocks; iBlock2Mini++)
+		
+		//Add trials, but only if there are trials in this block
+		if (blockParamsCats.nTrials > 0)
 		{
-			trialSequence.push(getMiniMixer2({
-			nTrialsInMini : nTrialsInMini, currentCond : blockCondition,
-			rightTrial : rightCatTrial, leftTrial : leftCatTrial, blockNum : iBlock,
-			blockLayout : blockLayout}));
+    		trialSequence.push(getInstTrial(blockParamsCats));
+    		for (iBlock2Mini = 1; iBlock2Mini <= blockParamsCats.nMiniBlocks; iBlock2Mini++)
+    		{
+    			trialSequence.push(getMiniMixer2({
+    			nTrialsInMini : nTrialsInMini, currentCond : blockCondition,
+    			rightTrial : rightCatTrial, leftTrial : leftCatTrial, blockNum : iBlock,
+    			blockLayout : blockLayout}));
+    		}
+    		iBlock++;
 		}
+		
 		//////////////////////////////
 		////Block 2: Attributes
-		iBlock++;
 		//Set variables related to the sides
 		blockParamsAtts.left1 = att1;
 		blockParamsAtts.right1 = att2;
@@ -908,6 +1054,16 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		}
 		//Set the block's condition
 		blockCondition = blockParamsAtts.left1.name + ',' + blockParamsAtts.right1.name;
+		var COMPATIBLE = 'compatible';
+		var INCOMPATIBLE = 'incompatible';
+		var isCompatible = INCOMPATIBLE;
+		if ( (rightAttName == att1.name && rightCatName == cat1.name) || 
+			(rightAttName == att2.name && rightCatName == cat2.name) )
+		{
+			isCompatible = COMPATIBLE;
+		}
+		//console.log('rightAttName='+rightAttName+' rightCatName='+rightCatName+' att1.name='+att1.name+' cat1.name='+cat1.name + 'isCompatible='+isCompatible);
+		
 		//Number variables
 		blockParamsAtts.nMiniBlocks = globalObj.blockAttributes_nMiniBlocks;
 		blockParamsAtts.nTrials = globalObj.blockAttributes_nTrials;
@@ -915,25 +1071,28 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		blockParamsAtts.nCats = 2;
 		//Instructions trial
 		blockParamsAtts.instTemplate = isTouch ? globalObj.instAttributePracticeTouch : globalObj.instAttributePractice;
-		trialSequence.push(getInstTrial(blockParamsAtts));
 		//Layout for the sorting trials
 		blockLayout = getLayout(blockParamsAtts);
 		//Number of trials in a mini block.
 		nTrialsInMini = blockParamsAtts.nTrials/blockParamsAtts.nMiniBlocks;
 		//Add a mixer for each mini block.
 		var iBlock1Mini;
-		for (iBlock1Mini = 1; iBlock1Mini <= blockParamsAtts.nMiniBlocks; iBlock1Mini++)
+		if (blockParamsAtts.nTrials > 0)
 		{
-			trialSequence.push(getMiniMixer2(
-			{nTrialsInMini : nTrialsInMini, currentCond : blockCondition,
-			rightTrial : rightAttTrial, leftTrial : leftAttTrial, blockNum : iBlock,
-			blockLayout : blockLayout}));
+    		trialSequence.push(getInstTrial(blockParamsAtts));
+    		for (iBlock1Mini = 1; iBlock1Mini <= blockParamsAtts.nMiniBlocks; iBlock1Mini++)
+    		{
+    			trialSequence.push(getMiniMixer2(
+    			{nTrialsInMini : nTrialsInMini, currentCond : blockCondition,
+    			rightTrial : rightAttTrial, leftTrial : leftAttTrial, blockNum : iBlock,
+    			blockLayout : blockLayout}));
+    		}
+    		iBlock++;
 		}
 		//////////////////////////////
 		////Block 3: First combined block
-		iBlock++;
 		var blockParamsCombined = {
-			nBlocks : globalObj.nBlocks,
+			nBlocks : nBlocks,
 			remindError : globalObj.remindError,
 			remindErrorText : globalObj.remindErrorText,
 			remindErrorTextTouch : globalObj.remindErrorTextTouch
@@ -953,49 +1112,53 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		blockParamsCombined.nCats = 4;
 		//Instructions trial.
 		blockParamsCombined.instTemplate = isTouch ? globalObj.instFirstCombinedTouch : globalObj.instFirstCombined;
-		trialSequence.push(getInstTrial(blockParamsCombined));
 		//Get the layout for the sorting trials.
 		blockLayout = getLayout(blockParamsCombined);
 		//Fill the trials.
 		nTrialsInMini = blockParamsCombined.nTrials/blockParamsCombined.nMiniBlocks;
 		var iBlock3Mini;
-		for (iBlock3Mini = 1; iBlock3Mini <= blockParamsCombined.nMiniBlocks; iBlock3Mini++)
+		
+		if (blockParamsCombined.nTrials > 0)
 		{
-			trialSequence.push(getMiniMixer4({
-			nTrialsInMini : nTrialsInMini, currentCond : blockCondition,
-			rightTrial1 : rightAttTrial, leftTrial1 : leftAttTrial,
-			rightTrial2 : rightCatTrial, leftTrial2 : leftCatTrial,
-			blockNum : iBlock, blockLayout : blockLayout}));
+    		trialSequence.push(getInstTrial(blockParamsCombined));
+    		for (iBlock3Mini = 1; iBlock3Mini <= blockParamsCombined.nMiniBlocks; iBlock3Mini++)
+    		{
+    			trialSequence.push(getMiniMixer4({
+    			nTrialsInMini : nTrialsInMini, currentCond : blockCondition, cong:isCompatible, 
+    			rightTrial1 : rightAttTrial, leftTrial1 : leftAttTrial,
+    			rightTrial2 : rightCatTrial, leftTrial2 : leftCatTrial,
+    			blockNum : iBlock, blockLayout : blockLayout, parcel:'first'}));
+    		}
+			iBlock++;
 		}
 		//////////////////////////////
 		////Second combined block.
-		if (globalObj.nBlocks == 7)
-		{//Fourth block is another combined block.
-			iBlock++;
-			blockParamsCombined.blockNum = iBlock;
-			blockParamsCombined.nMiniBlocks = globalObj.blockSecondCombined_nMiniBlocks;
-			blockParamsCombined.nTrials = globalObj.blockSecondCombined_nTrials;
-			//Instructions trial.
-			blockParamsCombined.instTemplate = isTouch ? globalObj.instSecondCombinedTouch : globalObj.instSecondCombined;
+		blockParamsCombined.blockNum = iBlock;
+		blockParamsCombined.nMiniBlocks = globalObj.blockSecondCombined_nMiniBlocks;
+		blockParamsCombined.nTrials = globalObj.blockSecondCombined_nTrials;
+		//Instructions trial.
+		blockParamsCombined.instTemplate = isTouch ? globalObj.instSecondCombinedTouch : globalObj.instSecondCombined;
+		//The layout for the sorting trials.
+		blockLayout = getLayout(blockParamsCombined);
+		//Fill the trials
+		nTrialsInMini = blockParamsCombined.nTrials/blockParamsCombined.nMiniBlocks;
+		var iBlock4Mini;
+		if (blockParamsCombined.nTrials > 0)
+		{
 			trialSequence.push(getInstTrial(blockParamsCombined));
-			//The layout for the sorting trials.
-			blockLayout = getLayout(blockParamsCombined);
-			//Fill the trials
-			nTrialsInMini = blockParamsCombined.nTrials/blockParamsCombined.nMiniBlocks;
-			var iBlock4Mini;
 			for (iBlock4Mini = 1; iBlock4Mini <= blockParamsCombined.nMiniBlocks; iBlock4Mini++)
 			{
 				trialSequence.push(getMiniMixer4({
-				nTrialsInMini : nTrialsInMini, currentCond : blockCondition,
+				nTrialsInMini : nTrialsInMini, currentCond : blockCondition, cong:isCompatible, 
 				rightTrial1 : rightAttTrial, leftTrial1 : leftAttTrial,
 				rightTrial2 : rightCatTrial, leftTrial2 : leftCatTrial,
-				blockNum : iBlock, blockLayout : blockLayout}));
+				blockNum : iBlock, blockLayout : blockLayout, parcel:'second'}));
 			}
-
+		    iBlock++;
 		}
+		isCompatible = (isCompatible==INCOMPATIBLE ? COMPATIBLE : INCOMPATIBLE);
 		//////////////////////////////
 		////Switch categories side block.
-		iBlock++;
 		//Do the switch
 		blockParamsCats.right1 = blockParamsCombined.left2;
 		blockParamsCats.left1 = blockParamsCombined.right2;
@@ -1009,22 +1172,25 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		blockCondition = blockParamsCats.left1.name + ',' + blockParamsCats.right1.name;
 		blockParamsCats.blockNum = iBlock;
 		blockParamsCats.nCats = 2;
-		trialSequence.push(getInstTrial(blockParamsCats));
 		//The layout for the sorting trials.
 		blockLayout = getLayout(blockParamsCats);
 		//Fill the trials.
 		nTrialsInMini = blockParamsCats.nTrials/blockParamsCats.nMiniBlocks;
 		var iBlock5Mini;
-		for (iBlock5Mini = 1; iBlock5Mini <= blockParamsCats.nMiniBlocks; iBlock5Mini++)
+		if (blockParamsCats.nTrials > 0)
 		{
-			trialSequence.push(getMiniMixer2({
-			nTrialsInMini : nTrialsInMini, currentCond : blockCondition,
-			rightTrial : rightCatTrial, leftTrial : leftCatTrial, blockNum : iBlock,
-			blockLayout : blockLayout}));
+    		trialSequence.push(getInstTrial(blockParamsCats));
+    		for (iBlock5Mini = 1; iBlock5Mini <= blockParamsCats.nMiniBlocks; iBlock5Mini++)
+    		{
+    			trialSequence.push(getMiniMixer2({
+    			nTrialsInMini : nTrialsInMini, currentCond : blockCondition,
+    			rightTrial : rightCatTrial, leftTrial : leftCatTrial, blockNum : iBlock,
+    			blockLayout : blockLayout}));
+    		}
+    		iBlock++;
 		}
 		//////////////////////////////
 		////The other combined block
-		iBlock++;
 		//Get the categories side from the switch block.
 		blockParamsCombined.right2 = blockParamsCats.right1;
 		blockParamsCombined.left2 = blockParamsCats.left1;
@@ -1040,49 +1206,123 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		{
 			blockParamsCombined.instTemplate = isTouch ? globalObj.instThirdCombinedTouch : globalObj.instThirdCombined;
 		}
-		trialSequence.push(getInstTrial(blockParamsCombined));
 		//Layout for the sorting trials.
 		blockLayout = getLayout(blockParamsCombined);
 		//Fill the trials.
 		nTrialsInMini = blockParamsCombined.nTrials/blockParamsCombined.nMiniBlocks;
 		var iBlock6Mini;
-		for (iBlock6Mini = 1; iBlock6Mini <= blockParamsCombined.nMiniBlocks; iBlock6Mini++)
+		if (blockParamsCombined.nTrials > 0)
 		{
-			trialSequence.push(getMiniMixer4({
-			nTrialsInMini : nTrialsInMini, currentCond : blockCondition,
-			rightTrial1 : rightAttTrial, leftTrial1 : leftAttTrial,
-			rightTrial2 : rightCatTrial, leftTrial2 : leftCatTrial,
-			blockNum : iBlock, blockLayout : blockLayout}));
+    		trialSequence.push(getInstTrial(blockParamsCombined));
+    		for (iBlock6Mini = 1; iBlock6Mini <= blockParamsCombined.nMiniBlocks; iBlock6Mini++)
+    		{
+    			trialSequence.push(getMiniMixer4({
+    			nTrialsInMini : nTrialsInMini, currentCond : blockCondition, cong:isCompatible, 
+    			rightTrial1 : rightAttTrial, leftTrial1 : leftAttTrial,
+    			rightTrial2 : rightCatTrial, leftTrial2 : leftCatTrial,
+    			blockNum : iBlock, blockLayout : blockLayout, parcel:'first'}));
+    		}
+			iBlock++;
 		}
 		//////////////////////////////
 		////Second combined block.
-		if (globalObj.nBlocks == 7)
-		{//Fourth block is another combined block.
-			iBlock++;
-			blockParamsCombined.blockNum = iBlock;
-			blockParamsCombined.nMiniBlocks = globalObj.blockSecondCombined_nMiniBlocks;
-			blockParamsCombined.nTrials = globalObj.blockSecondCombined_nTrials;
-			//Instructions trial.
-			blockParamsCombined.instTemplate = isTouch ? globalObj.instSecondCombinedTouch : globalObj.instSecondCombined;
-			if (globalObj.instFourthCombined != 'instSecondCombined')
-			{
-				blockParamsCombined.instTemplate = isTouch ? globalObj.instFourthCombinedTouch : globalObj.instFourthCombined;
-			}
+		//Seventh block is another combined block.
+		blockParamsCombined.blockNum = iBlock;
+		blockParamsCombined.nMiniBlocks = globalObj.blockSecondCombined_nMiniBlocks;
+		blockParamsCombined.nTrials = globalObj.blockSecondCombined_nTrials;
+		//Instructions trial.
+		blockParamsCombined.instTemplate = isTouch ? globalObj.instSecondCombinedTouch : globalObj.instSecondCombined;
+		if (globalObj.instFourthCombined != 'instSecondCombined')
+		{
+			blockParamsCombined.instTemplate = isTouch ? globalObj.instFourthCombinedTouch : globalObj.instFourthCombined;
+		}
+		//Layout for sorting trials.
+		blockLayout = getLayout(blockParamsCombined);
+		//Fill the trials.
+		nTrialsInMini = blockParamsCombined.nTrials/blockParamsCombined.nMiniBlocks;
+		var iBlock7Mini;
+		if (blockParamsCombined.nTrials > 0)
+		{
 			trialSequence.push(getInstTrial(blockParamsCombined));
-			//Layout for sorting trials.
-			blockLayout = getLayout(blockParamsCombined);
-			//Fill the trials.
-			nTrialsInMini = blockParamsCombined.nTrials/blockParamsCombined.nMiniBlocks;
-			var iBlock7Mini;
 			for (iBlock7Mini = 1; iBlock7Mini <= blockParamsCombined.nMiniBlocks; iBlock7Mini++)
 			{
 				trialSequence.push(getMiniMixer4({
-				nTrialsInMini : nTrialsInMini, currentCond : blockCondition,
+				nTrialsInMini : nTrialsInMini, currentCond : blockCondition, cong:isCompatible, 
 				rightTrial1 : rightAttTrial, leftTrial1 : leftAttTrial,
 				rightTrial2 : rightCatTrial, leftTrial2 : leftCatTrial,
-				blockNum : iBlock, blockLayout : blockLayout}));
+				blockNum : iBlock, blockLayout : blockLayout, parcel:'second'}));
 			}
+        }
+
+		//////// in this trial the score of the participant is computed//////////////////
+
+		trialSequence.push({
+			inherit : 'instructions',
+			data: {blockStart:true},
+			layout : [{media:{word:''}}],
+			customize : function(element, global){
+				var DScoreObj = scorer.computeD();
+				piCurrent.feedback = DScoreObj.FBMsg;
+				piCurrent.d = DScoreObj.DScore;
+				//console.log(piCurrent.feedback);
+			},
+
+			interactions: [{
+				conditions: [{type:'begin'}],
+				actions: [{type: 'endTrial'}]
+			}]
+		});
+		
+        if(showDebriefing){
+            //////////////////////////////
+            //Add pre-Page before the debriefing is shown
+            trialSequence.push({
+                inherit : 'instructions',
+                data: {blockStart:true},
+                layout : [{media:{word:''}}],
+                stimuli : [
+                    {
+                        inherit : 'Default',
+                        media : {word : (isTouch ? piCurrent.preDebriefingTouchText : piCurrent.preDebriefingText)}
+                    }
+                ]
+            });
+            
+            /////////////////////////////
+            //add debriefing trial, the feedback will be shown with text above and under ther result.
+            trialSequence.push({
+                //the feedback massege will be shown to the user at the center of the screen
+                stimuli: [{data:{handle:'feedbackstim'},media :{word:'<%=current.feedback%>'}}],
+                //when the user press enter the trial will end, there is no time limit for reading the feedback
+				input: [{handle:'space',on:'space'}],
+				layout: [
+					{//pre-text at the debriefing page, will be shown above the feeaback massege
+						media:piCurrent.debriefingTextTop,
+						//to control exactly were the text will be located change the 'top' property, low values at the top of the screen, hiegh values at the low part of the screen
+						location:{left:2,top:40,right:2},
+						css:{padding:'2%',fontSize:'1em'}
+					},
+					{//post-text at the debriefing page, will be shown under the feeaback massege
+						media:piCurrent.debriefingTextBottom,
+						//to control exactly were the text will be located change the 'top' property, low values at the top of the screen, hiegh values at the low part of the screen
+						location:{left:2,top:55,right:2},
+						css:{padding:'2%',fontSize:'1em'}
+					}
+				],
+                        
+				interactions: [
+					{
+						conditions: [{type:'begin'}],
+						actions: [{type: 'showStim', handle:'feedbackstim'}]
+					},
+					{
+						conditions: [{type:'inputEquals',value:'space'}],
+						actions: [{type:'endTrial'}]
+					}
+				]    
+			});		
 		}
+			
 		//////////////////////////////
 		//Add final trial
 		trialSequence.push({
@@ -1095,7 +1335,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 					media : {word : (isTouch ? piCurrent.finalTouchText : piCurrent.finalText)}
 				}
 			]
-		});
+        });
 
 		//Add the trials sequence to the API.
 		API.addSequence(trialSequence);
@@ -1107,19 +1347,13 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 		//Settings for the score computation.
 		scorer.addSettings('compute',{
 			ErrorVar:'score',
-			condVar:'condition',
+			condVar:'cong',
 			//condition 1
-			cond1VarValues: [
-				cat1.name + '/' + att1.name + ',' + cat2.name + '/' + att2.name,
-				cat2.name + '/' + att2.name + ',' + cat1.name + '/' + att1.name
-			],
+			cond1VarValues: [COMPATIBLE],
 			//condition 2
-			cond2VarValues: [
-				cat2.name + '/' + att1.name + ',' + cat1.name + '/' + att2.name,
-				cat1.name + '/' + att2.name + ',' + cat2.name + '/' + att1.name
-			],
-			parcelVar : "parcel", //We use only one parcel because it is probably not less reliable.
-			parcelValue : ['first'],
+			cond2VarValues: [INCOMPATIBLE],
+			parcelVar : "parcel", 
+			parcelValue : ['first', 'second'],
 			fastRT : 150, //Below this reaction time, the latency is considered extremely fast.
 			maxFastTrialsRate : 0.1, //Above this % of extremely fast responses within a condition, the participant is considered too fast.
 			minRT : 400, //Below this latency
