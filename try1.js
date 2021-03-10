@@ -16,68 +16,70 @@ return iatExtension({
 				{word: 'tradycja'},
 				{word: 'Mateusz Morawiecki'},
 				{word: 'patriarchat'},
-				{word: 'Husband'},
-				{word: 'Male'}	
+				{word: 'patriotyzm'},
+				{word: 'kościół'}	
 			], 
 			//Stimulus css (style)
 			stimulusCss : {color:'#0000FF','font-size':'2.3em'}
 		},	
 		attribute2 :	{
-			name : 'Female', //Will appear in the data.
+			name : 'Lewicowość', //Will appear in the data.
 			title : {
-				media : {word : 'Female'}, //Name of the category presented in the task.
+				media : {word : 'Lewicowość'}, //Name of the category presented in the task.
 				css : {color:'#0000FF','font-size':'1.8em'}, //Style of the category title.
 				height : 4 //Used to position the "Or" in the combined block.
 			}, 
 			stimulusMedia : [ //Stimuli content as PIP's media objects
-				{word: 'Mother'},
-				{word: 'Wife'},
-				{word: 'Aunt'},
-				{word: 'Woman'},
-				{word: 'Girl'},
-				{word: 'Female'},
-				{word: 'Grandma'},
-				{word: 'Daughter'}
+				{word: 'Wiosna'},
+				{word: 'wybór'},
+				{word: 'nowoczesność'},
+				{word: 'równość'},
+				{word: 'feminizm'},
+				{word: 'ekologia'},
+				{word: 'rozwój'},
+				{word: 'liberalizm'}
 			], 
 			//Stimulus css
 			stimulusCss : {color:'#0000FF','font-size':'2.3em'}
 		},
 		category1 : 
 		{
-			name : 'Science', 
+			name : 'Pozytywny', 
 			title : {
-				media : {word : 'Science'}, 
+				media : {word : 'Pozytywny'}, 
 				css : {color:'#31940F','font-size':'1.8em'}, 
 				height : 4 //Used to position the "Or" in the combined block.
 			}, 
 			stimulusMedia : [ //Stimuli content as PIP's media objects
-				{word: 'Astronomy'},
-				{word: 'Math'},
-				{word: 'Chemistry'},
-				{word: 'Physics'},
-				{word: 'Biology'},
-				{word: 'Geology'},
-				{word: 'Engineering'}
+				{word: 'akceptacja'},
+				{word: 'bezpieczeństwo'},
+				{word: 'zaufanie'},
+				{word: 'pokój'},
+				{word: 'poparcie'},
+				{word: 'uprzejmość'},
+				{word: 'życzliwość'},
+				{word: 'szacunek'}
 			], 
 			//Stimulus css
 			stimulusCss : {color:'#31940F','font-size':'2.3em'} 
 		},
 		category2 : 
 		{
-			name : 'Liberal Arts', 
+			name : 'Negatywny', 
 			title : {
-				media : {word : 'Liberal Arts'}, 
+				media : {word : 'Negatywny'}, 
 				css : {color:'#31940F','font-size':'1.8em'}, 
 				height : 4 //Used to position the "Or" in the combined block.
 			}, 
 			stimulusMedia : [ //Stimuli content as PIP's media objects
-				{word: 'History'},
-				{word: 'Arts'},
-				{word: 'Humanities'},
-				{word: 'English'},
-				{word: 'Philosophy'},
-				{word: 'Music'}, 
-				{word: 'Literature'}
+				{word: 'niesprawiedliwość'},
+				{word: 'wojna'},
+				{word: 'nienawiść'},
+				{word: 'nietolerancja'},
+				{word: 'przegrana'},
+				{word: 'niekulturalność'}, 
+				{word: 'wstręt'},
+				{word: 'strach'}
 			], 
 			//Stimulus css
 			stimulusCss : {color:'#31940F','font-size':'2.3em'}
