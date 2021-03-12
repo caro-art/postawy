@@ -125,7 +125,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			blockCategories_nMiniBlocks : 5,
 			blockFirstCombined_nTrials : 20,
 			blockFirstCombined_nMiniBlocks : 5,
-			blockSecondCombined_nTrials : 40, //Change to 0 if you want 5 blocks (you would probably want to increase blockFirstCombined_nTrials).
+			blockSecondCombined_nTrials : 0, //Change to 0 if you want 5 blocks (you would probably want to increase blockFirstCombined_nTrials).
 			blockSecondCombined_nMiniBlocks : 10, 
 			blockSwitch_nTrials : 28,
 			blockSwitch_nMiniBlocks : 7,
@@ -183,7 +183,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				'Naciśnij palcem lewej ręki na klawisz <b>E</b> dla haseł z kategorii <font color="#0000ff">leftAttribute.</font>' +
 				'<br/>Naciśnij palcem prawej ręki na klawisz <b>I</b> dla haseł z kategorii <font color="#0000ff">rightAttribute</font>.<br/><br/>' +
 				'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. ' +
-				'Naciśnij dowolny klawisz, aby kontynuować. <br/>' +
+				'Naciśnij wtedy klawisz E lub I, aby kontynuować. <br/>' +
 				'<u>Wykonuj zadanie jak najszybciej </u> i jak najdokładniej.<br/><br/></p>'+
 				'<p align="center">Naciśnij <b>spację</b> jak będziesz gotowy, aby zacząć.</font></p></div>',
 			instAttributePracticeTouch: [
@@ -210,7 +210,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				'<br/>Naciśnij palcem prawej ręki na klawisz <b>I</b> dla haseł z kategorii <font color="#336600">rightCategory</font>.<br/>' +
 				'Hasła będą pojawiały się pojedynczo.<br/><br/>' +
 				'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. ' +
-				'Naciśnij dowolny klawisz, aby kontynuować.<br/>' +
+				'Naciśnij wtedy klawisz E lub I, aby kontynuować. <br/>' +
 				'<u>Wykonuj zadanie jak najszybciej</u> i jak najdokładniej.<br/><br/></p>'+
 				'<p align="center">Naciśnij <b>spację</b> jak będziesz gotowy, aby zacząć.</font></p></div>',
 			instCategoriesPracticeTouch: [
@@ -237,7 +237,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 				'Naciśnij klawisz <b>I</b> dla <font color="#336600">rightCategory</font> oraz dla  <font color="#0000ff">rightAttribute</font>.<br/>' +
 				'Każde hasło należy do tylko jednej kategorii.<br/><br/>' +
 				'Jeśli popełnisz błąd, pojawi się czerwony <font color="#ff0000"><b>X</b></font>. ' +
-				'Naciśnij dowolny klawisz, aby kontynuować.<br/>' + 
+				'Naciśnij wtedy klawisz E lub I, aby kontynuować.<br/>' + 
 				'<u>Wykonuj zadanie jak najszybciej</u> i jak najdokładniej.<br/><br/></p>' +
 				'<p align="center">Naciśnij <b>spację</b> jak będziesz gotowy, aby zacząć.</font></p></div>',
 			instFirstCombinedTouch:[
@@ -259,7 +259,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			instSecondCombined : '<div><p align="center" style="font-size:20px; font-family:arial">' +
 				'<font color="#000000"><u>Part blockNum of nBlocks </u><br/><br/></p>' +
 				'<p style="font-size:20px; text-align:left; vertical-align:bottom; margin-left:10px; font-family:arial">' +
-				'Ta część polega na tym samym co poprzednia.<br/>' +
+				'Ta część jest taka sama jak poprzednia poprzednia.<br/>' +
 				'Naciśnij klawisz <b>E</b> dla <font color="#336600">leftCategory</font> oraz dla <font color="#0000ff">leftAttribute</font>.<br/>' +
 				'Naciśnij klawisz <b>I</b> dla <font color="#336600">rightCategory</font> oraz dla  <font color="#0000ff">rightAttribute</font>.<br/>' +
 				'Każde hasło należy do tylko jednej kategorii.<br/><br/>' +
