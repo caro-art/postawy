@@ -11,13 +11,11 @@ return iatExtension({
 			}, 
 			stimulusMedia : [ //Stimuli content as PIP's media objects
 				{word: 'konserwatyzm'},
-				{word: 'ideologia'},
-				{word: 'Prawo i Sprawiedliwość'},
+				{word: 'kościół'},
 				{word: 'tradycja'},
-				{word: 'Mateusz Morawiecki'},
-				{word: 'patriarchat'},
 				{word: 'patriotyzm'},
-				{word: 'kościół'}	
+				{word: 'hierarchia'},
+				{word: 'autorytaryzm'}	
 			], 
 			//Stimulus css (style)
 			stimulusCss : {color:'#0000FF','font-size':'2.3em'}
@@ -30,14 +28,12 @@ return iatExtension({
 				height : 4 //Used to position the "Or" in the combined block.
 			}, 
 			stimulusMedia : [ //Stimuli content as PIP's media objects
-				{word: 'Wiosna'},
-				{word: 'wybór'},
-				{word: 'nowoczesność'},
-				{word: 'równość'},
-				{word: 'feminizm'},
 				{word: 'ekologia'},
+				{word: 'feminizm'},
+				{word: 'równość'},
+				{word: 'nowoczesność'},
 				{word: 'rozwój'},
-				{word: 'liberalizm'}
+				{word: 'równouprawnienie'}
 			], 
 			//Stimulus css
 			stimulusCss : {color:'#0000FF','font-size':'2.3em'}
@@ -51,14 +47,12 @@ return iatExtension({
 				height : 4 //Used to position the "Or" in the combined block.
 			}, 
 			stimulusMedia : [ //Stimuli content as PIP's media objects
-				{word: 'akceptacja'},
 				{word: 'bezpieczeństwo'},
-				{word: 'zaufanie'},
+				{word: 'tolerancja'},
 				{word: 'pokój'},
 				{word: 'poparcie'},
-				{word: 'uprzejmość'},
-				{word: 'życzliwość'},
-				{word: 'szacunek'}
+				{word: 'uznanie'},
+				{word: 'życzliwość'}
 			], 
 			//Stimulus css
 			stimulusCss : {color:'#31940F','font-size':'2.3em'} 
@@ -75,10 +69,8 @@ return iatExtension({
 				{word: 'niesprawiedliwość'},
 				{word: 'wojna'},
 				{word: 'nienawiść'},
-				{word: 'nietolerancja'},
-				{word: 'przegrana'},
+				{word: 'dyskryminacja'},
 				{word: 'niekulturalność'}, 
-				{word: 'wstręt'},
 				{word: 'strach'}
 			], 
 			//Stimulus css
