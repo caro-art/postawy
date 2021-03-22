@@ -47,7 +47,7 @@ return iatExtension({
 				height : 4 //Used to position the "Or" in the combined block.
 			}, 
 			stimulusMedia : [ //Stimuli content as PIP's media objects
-				{word: 'bezpieczeństwo'},
+				{word: 'szacunek'},
 				{word: 'tolerancja'},
 				{word: 'pokój'},
 				{word: 'poparcie'},
