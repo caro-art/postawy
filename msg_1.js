@@ -160,7 +160,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			rightKeyText : 'Naciśnij "I" dla', 
 			keysCss : {'font-size':'0.8em', 'font-family':'courier', color:'#000000'},
 			//Text and style for the separator between the top and bottom category labels.
-			orText : 'or', 
+			orText : 'lub', 
 			orCss : {'font-size':'1.8em', color:'#000000'},
 			
 			instWidth : 99, //The width of the instructions stimulus
