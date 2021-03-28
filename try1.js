@@ -15,7 +15,9 @@ return iatExtension({
 				{word: 'tradycja'},
 				{word: 'patriotyzm'},
 				{word: 'hierarchia'},
-				{word: 'autorytaryzm'}	
+				{word: 'autorytaryzm'},	
+				{word: 'patriarchat'},
+				{word: 'nacjonalizm'}
 			], 
 			//Stimulus css (style)
 			stimulusCss : {color:'#0000FF','font-size':'2.3em'}
@@ -33,7 +35,9 @@ return iatExtension({
 				{word: 'równość'},
 				{word: 'nowoczesność'},
 				{word: 'rozwój'},
-				{word: 'równouprawnienie'}
+				{word: 'równouprawnienie'},
+				{word: 'socjalizm'},
+				{word: 'opieka państwa'}
 			], 
 			//Stimulus css
 			stimulusCss : {color:'#0000FF','font-size':'2.3em'}
@@ -52,7 +56,9 @@ return iatExtension({
 				{word: 'pokój'},
 				{word: 'poparcie'},
 				{word: 'uznanie'},
-				{word: 'życzliwość'}
+				{word: 'życzliwość'},
+				{word: 'nagroda'},
+				{word: 'zaufanie'}
 			], 
 			//Stimulus css
 			stimulusCss : {color:'#31940F','font-size':'2.3em'} 
@@ -71,7 +77,9 @@ return iatExtension({
 				{word: 'nienawiść'},
 				{word: 'dyskryminacja'},
 				{word: 'niekulturalność'}, 
-				{word: 'strach'}
+				{word: 'strach'},
+				{word: 'wrogość'},
+				{word: 'kompromitacja'}
 			], 
 			//Stimulus css
 			stimulusCss : {color:'#31940F','font-size':'2.3em'}
