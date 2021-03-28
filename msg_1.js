@@ -296,7 +296,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 					'</p>',
 					'<p align="left" style="margin-left:5px">',
 						'<br/>',
-						'Watch out, the labels have changed position!<br/>',
+						'Uważaj, kategorie zmieniły swoje pozycje!!<br/>',
 							'Naciśnij palcem lewej ręki na <b>left</b> zielony obszar dla <font color="#336600">leftCategory</font> items.<br/>',
 							'Naciśnij palcem prawej ręki na <b>right</b> zielony obszar dla <font color="#336600">rightCategory</font> items.<br/>',
 							'Hasła będą pojawiały się pojedynczo.',
